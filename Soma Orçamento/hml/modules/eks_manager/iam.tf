@@ -31,18 +31,18 @@ data "aws_iam_policy_document" "manager_policy" {
     resources = ["*"]
   }
   statement {
-    actions = [ "ssmmessages:*" ]
-    resources = [ "*" ]
+    actions   = ["ssmmessages:*"]
+    resources = ["*"]
   }
   statement {
-    actions = [ "ec2messages:*" ]
-    resources = [ "*" ]
+    actions   = ["ec2messages:*"]
+    resources = ["*"]
   }
   statement {
     actions   = ["sts:AssumeRole"]
     resources = [aws_iam_role.manager.arn]
   }
-  
+
 }
 
 resource "aws_iam_policy" "manager_policy" {

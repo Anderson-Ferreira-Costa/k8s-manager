@@ -197,8 +197,8 @@ variable "source_dest_check" {
 
 variable "vpc_id" {
   description = "AWS VPC id."
-  type = string
-  
+  type        = string
+
 }
 
 variable "subnet_id" {
@@ -287,11 +287,11 @@ variable "manager_permissions" {
 variable "eks_manager_k8s_name" {
   description = "Kubernetes manager server name"
   type        = string
-  default = "default"
+  default     = "default"
 }
 
 variable "cluster_name" {
   description = "EKS cluster name"
-  type = string
-  default = "default"
+  type        = string
+  default     = "default"
 }

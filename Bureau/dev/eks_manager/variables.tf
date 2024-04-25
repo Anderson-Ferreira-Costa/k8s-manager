@@ -127,7 +127,7 @@ variable "ipv6_addresses" {
 variable "key_name" {
   description = "Key name of the Key Pair to use for the instance; which can be managed using the `aws_key_pair` resource"
   type        = string
-  default = null
+  default     = null
 }
 
 variable "launch_template" {
@@ -288,10 +288,10 @@ variable "vpc_id" {
 variable "manager_permissions" {
   description = "Additional permissions for the manager."
   type        = list(string)
-  default     = [
-    "eks:DescribeCluster", 
-    "eks:UpdateClusterConfig", 
-    "iam:ListOpenIDConnectProviders", 
+  default = [
+    "eks:DescribeCluster",
+    "eks:UpdateClusterConfig",
+    "iam:ListOpenIDConnectProviders",
     "iam:CreatePolicy"
   ]
 }
@@ -299,11 +299,11 @@ variable "manager_permissions" {
 variable "eks_manager_k8s_name" {
   description = "Kubernetes manager server name"
   type        = string
-  default = "default"
+  default     = "default"
 }
 
 variable "cluster_name" {
   description = "EKS cluster name"
-  type = string
-  default = "default"
+  type        = string
+  default     = "default"
 }
