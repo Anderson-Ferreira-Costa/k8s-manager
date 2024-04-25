@@ -1,6 +1,6 @@
 region = "ca-central-1"
 # vpc_id    = "vpc-02806f964ef00890d"
-# subnet_id = "subnet-0cae3092a973ac813"
+subnet_id = "subnet-0359af0bf9c9d1bfb"
 
 name          = "eks_manager_prd"
 instance_type = "t3a.small"
