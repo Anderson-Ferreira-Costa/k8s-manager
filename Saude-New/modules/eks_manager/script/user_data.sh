@@ -20,6 +20,9 @@ curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv /tmp/eksctl /usr/local/bin
 
+echo "alias k='kubectl'" >> /home/ec2-user/.bashrc
+source ~/.bashrc
+
 sudo yum -y remove golang
 curl -LO https://go.dev/dl/go1.21.4.linux-amd64.tar.gz
 sudo tar -C /usr/local -xvf go1.21.4.linux-amd64.tar.gz

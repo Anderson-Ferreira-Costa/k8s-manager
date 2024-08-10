@@ -1,31 +1,31 @@
-## Creates a key pair for EC2 and stores it in AWS Secrets Manager ##
-resource "tls_private_key" "key" {
-  count     = var.key_name != null ? 0 : 1
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
+# ## Creates a key pair for EC2 and stores it in AWS Secrets Manager ##
+# resource "tls_private_key" "key" {
+#   count     = var.key_name != null ? 0 : 1
+#   algorithm = "RSA"
+#   rsa_bits  = 4096
+# }
 
-resource "aws_key_pair" "keypair" {
-  count           = var.key_name != null ? 0 : 1
-  key_name_prefix = var.name
-  public_key      = tls_private_key.key[0].public_key_openssh
-}
+# resource "aws_key_pair" "keypair" {
+#   count           = var.key_name != null ? 0 : 1
+#   key_name_prefix = var.name
+#   public_key      = tls_private_key.key[0].public_key_openssh
+# }
 
-resource "aws_secretsmanager_secret" "secret_key" {
-  count       = var.key_name != null ? 0 : 1
-  name_prefix = var.name
-  description = "Secrets para ec2."
-  tags = merge(
-    var.tags,
-    { "Name" : "${var.name}-key" }
-  )
-}
+# resource "aws_secretsmanager_secret" "secret_key" {
+#   count       = var.key_name != null ? 0 : 1
+#   name_prefix = var.name
+#   description = "Secrets para ec2."
+#   tags = merge(
+#     var.tags,
+#     { "Name" : "${var.name}-key" }
+#   )
+# }
 
-resource "aws_secretsmanager_secret_version" "secret_key_value" {
-  count         = var.key_name != null ? 0 : 1
-  secret_id     = aws_secretsmanager_secret.secret_key[0].id
-  secret_string = tls_private_key.key[0].private_key_pem
-}
+# resource "aws_secretsmanager_secret_version" "secret_key_value" {
+#   count         = var.key_name != null ? 0 : 1
+#   secret_id     = aws_secretsmanager_secret.secret_key[0].id
+#   secret_string = tls_private_key.key[0].private_key_pem
+# }
 
 
 ## AWS EC2 Instance creation ###
@@ -42,7 +42,7 @@ resource "aws_instance" "this" {
   subnet_id              = var.subnet_id != null ? var.subnet_id : data.aws_subnet.subnet.id
   vpc_security_group_ids = var.vpc_security_group_ids == null ? [aws_security_group.eks_manager.id] : var.vpc_security_group_ids
 
-  key_name             = var.key_name != null ? var.key_name : length(aws_key_pair.keypair) > 0 ? aws_key_pair.keypair[0].key_name : null
+  # key_name             = var.key_name != null ? var.key_name : length(aws_key_pair.keypair) > 0 ? aws_key_pair.keypair[0].key_name : null
   monitoring           = var.monitoring
   get_password_data    = var.get_password_data
   iam_instance_profile = var.iam_instance_profile == null ? aws_iam_role.manager.name : var.iam_instance_profile
